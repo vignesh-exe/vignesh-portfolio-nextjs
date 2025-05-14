@@ -1,0 +1,64 @@
+.hover {
+  transition: var(--transition-micro-medium);
+
+  &:hover {
+    transform: translateX(var(--static-space-4));
+  }
+}
+
+.avatar {
+  position: sticky;
+  height: fit-content;
+  top: var(--static-space-64);
+}
+
+@media (--s) {
+  .avatar {
+    top: auto;
+  }
+
+  .textAlign {
+    text-align: center;
+  }
+
+  .blockAlign {
+    align-self: center;
+  }
+}
+
+// Add these styles to your existing about.module.scss file
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.skillCard {
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+
+    .skillLogo img {
+      transform: scale(1.1);
+    }
+
+    .skillOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.skillLogo img {
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
