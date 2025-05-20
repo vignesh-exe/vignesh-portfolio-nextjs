@@ -1,11 +1,15 @@
 import React from 'react';
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
-import { baseURL, routes } from '@/app/resources';
-import { home, about, person, newsletter } from '@/app/resources/content';
+import { baseURL, mailchimp, routes } from '@/app/resources';
+import { home, about, person, newsletter, blog, work } from '@/app/resources/content';
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { Meta, Schema } from '@/once-ui/modules';
+import TextPressure from '@/blocks/TextAnimations/TextPressure/TextPressure';
+import ModelViewerSection from '@/blocks/Components/ModelViewerSection';
+import Magnet from '@/blocks/Animations/Magnet/Magnet';
+import SkillSection from '@/components/SkillSection';
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -18,7 +22,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="xl" horizontal="center">
+    <Column maxWidth="l" gap="xl" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -32,79 +36,108 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`
         }}
       />
-      <Column fillWidth paddingY="24" gap="m">
-        {/* Modified this section to include a row with headline and GIF */}
-        <Flex fillWidth gap="32" mobileDirection="column">
-          <Column maxWidth="s" flex={1}>
-            {home.featured && (
-              <RevealFx fillWidth horizontal="start" paddingTop="16" paddingBottom="32" paddingLeft="12">
-                <Badge
-                  background="brand-alpha-weak"
-                  paddingX="12"
-                  paddingY="4"
-                  onBackground="neutral-strong"
-                  textVariant="label-default-s"
-                  arrow={false}
-                  href={home.featured.href}
-                >
-                  <Row paddingY="2">{home.featured.title}</Row>
-                </Badge>
-              </RevealFx>
-            )}
-            <RevealFx
-              translateY="4"
-              fillWidth
-              horizontal="start"
-              paddingBottom="16"
-              style={{ marginRight: '30rem', width: '100%' }}
-            >
-              <Heading wrap="balance" variant="display-strong-l">
-                {home.headline}
-              </Heading>
-            </RevealFx>
-            <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
-              <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-                {home.subline}
-              </Text>
-            </RevealFx>
-            <RevealFx paddingTop="12" delay={0.4} horizontal="start" paddingLeft="12">
-              <Button id="about" data-border="rounded" href={about.path} variant="secondary" size="m" arrowIcon>
-                <Flex gap="8" vertical="center">
-                  {about.avatar.display && (
-                    <Avatar style={{ marginLeft: '-0.75rem', marginRight: '0.25rem' }} src={person.avatar} size="m" />
-                  )}
-                  {about.title}
-                </Flex>
-              </Button>
-            </RevealFx>
-          </Column>
-          <RevealFx flex={1} translateY="8" delay={0.3}>
-            <Flex
-              fillWidth
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <img
-                src="/images/vicky-gif.gif"
-                alt="Animated profile"
-                style={{
-                  width: '160%', // Changed from 100% to 80%
-                  height: 'auto',
-                  maxHeight: '300px',
-                  objectFit: 'contain',
-                  mixBlendMode: 'multiply' // Apply blend mode to the GIF
-                }}
-              />
+      {/* TextPressure Hello! section */}
+      <Column fillWidth paddingY="24" gap="m" horizontal="center" align="center">
+        <RevealFx
+          translateY="4"
+          fillWidth
+          horizontal="center"
+          paddingBottom="16"
+          style={{ width: '200%', marginTop: '60px' }}
+        >
+          <Heading wrap="balance" variant="display-strong-l" style={{ textAlign: 'center' }}>
+            <TextPressure
+              text="Hello!!!"
+              flex={true}
+              alpha={false}
+              stroke={false}
+              width={false}
+              weight={true}
+              italic={false}
+              textColor="#ffffff"
+              strokeColor="#ff0000"
+              minFontSize={450}
+            />
+          </Heading>
+        </RevealFx>
+
+        {/* Subline text */}
+        <RevealFx
+          translateY="8"
+          delay={0.2}
+          fillWidth
+          horizontal="center"
+          paddingBottom="32"
+          style={{ marginTop: '-20px' }}
+        >
+          <Text
+            wrap="balance"
+            onBackground="neutral-weak"
+            variant="heading-default-xl"
+            style={{ textAlign: 'center', maxWidth: '800px', fontWeight: 900, marginTop: '2px', fontSize: '30px' }}
+          >
+            {home.subline}
+          </Text>
+        </RevealFx>
+
+        {/* About button */}
+        <RevealFx paddingTop="12" delay={0.4} horizontal="center" style={{ marginTop: '-30px' }}>
+          <Button id="about" data-border="rounded" href={about.path} variant="secondary" size="m" arrowIcon>
+            <Flex gap="8" vertical="center">
+              {about.avatar.display && (
+                <img
+                  src="/images/vicky-gif.gif"
+                  style={{
+                    width: '62px',
+                    height: '62px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginLeft: '-0.75rem'
+                    // marginRight: '0.rem'
+                  }}
+                />
+              )}
+              {about.title}
             </Flex>
+          </Button>
+        </RevealFx>
+
+        {/* Featured badge */}
+        {home.featured && (
+          <RevealFx fillWidth horizontal="center" paddingTop="16" paddingBottom="32" style={{ marginTop: '-30px' }}>
+            <Badge
+              background="brand-alpha-weak"
+              paddingX="12"
+              paddingY="4"
+              onBackground="neutral-strong"
+              textVariant="label-default-s"
+              arrow={true}
+              href={home.featured.href}
+            >
+              <Row paddingY="2">{home.featured.title}</Row>
+            </Badge>
           </RevealFx>
-        </Flex>
+        )}
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
+      {/* Headline */}
+      <RevealFx
+        translateY="4"
+        fillWidth
+        horizontal="start"
+        paddingBottom="16"
+        style={{ width: '100%', alignItems: 'center', textAlign: 'center' }}
+      >
+        <Heading wrap="balance" variant="display-strong-l">
+          {home.headline}
+        </Heading>
       </RevealFx>
+      <div style={{ marginTop: '-135px', marginBottom: '-230px' }}>
+        <ModelViewerSection />
+      </div>
+      <Column fillWidth paddingY="24" gap="xl" horizontal="center" align="center">
+        <SkillSection />
+      </Column>
+      {/* Blog Section */}
       {routes['/blog'] && (
         <Flex fillWidth gap="24" mobileDirection="column">
           <Flex flex={1} paddingLeft="l" paddingTop="24">
@@ -117,8 +150,26 @@ export default function Home() {
           </Flex>
         </Flex>
       )}
+      {/* Projects Section */}
       <Projects range={[2]} />
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
+      {/* Contact Badge with Magnet Effect */}
+      {newsletter.display && (
+        <RevealFx fillWidth horizontal="center" paddingTop="16" paddingBottom="32" style={{ width: '200%' }}>
+          <Magnet padding={50} magnetStrength={3}>
+            <Badge
+              background="brand-alpha-weak"
+              paddingX="32"
+              paddingY="4"
+              onBackground="neutral-strong"
+              textVariant="label-default-s"
+              arrow={true}
+              href={blog.path}
+            >
+              <Row paddingY="2">CONTACT - VIGNESH</Row>
+            </Badge>
+          </Magnet>
+        </RevealFx>
+      )}
     </Column>
   );
 }

@@ -1,5 +1,4 @@
-import { IconType } from "react-icons";
-
+import { IconType } from 'react-icons';
 import {
   HiChevronUp,
   HiChevronDown,
@@ -25,18 +24,16 @@ import {
   HiOutlineEyeSlash,
   HiMoon,
   HiSun,
-  HiOutlineDocument,
-} from "react-icons/hi2";
-
+  HiOutlineDocument
+} from 'react-icons/hi2';
 import {
   PiHouseDuotone,
   PiUserCircleDuotone,
   PiGridFourDuotone,
   PiBookBookmarkDuotone,
-  PiImageDuotone,
-} from "react-icons/pi";
-
-import { FaDiscord, FaGithub, FaLinkedin, FaX } from "react-icons/fa6";
+  PiImageDuotone
+} from 'react-icons/pi';
+import { FaDiscord, FaGithub, FaLinkedin, FaX, FaMedium } from 'react-icons/fa6';
 
 export const iconLibrary: Record<string, IconType> = {
   chevronUp: HiChevronUp,
@@ -68,11 +65,12 @@ export const iconLibrary: Record<string, IconType> = {
   github: FaGithub,
   linkedin: FaLinkedin,
   x: FaX,
+  medium: FaMedium, // Added Medium icon
   clipboard: HiClipboard,
   arrowUpRightFromSquare: HiArrowTopRightOnSquare,
   moon: HiMoon,
   sun: HiSun,
-  document: HiOutlineDocument,
+  document: HiOutlineDocument
 };
 
 export type IconLibrary = typeof iconLibrary;

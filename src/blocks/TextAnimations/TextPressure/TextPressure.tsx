@@ -22,7 +22,7 @@ interface TextPressureProps {
 const TextPressure: React.FC<TextPressureProps> = ({
   text = 'Compressa',
   fontFamily = 'Compressa VF',
-  fontUrl = 'https://fonts.cdnfonts.com/s/42898/SFPRODISPLAYREGULAR.woff',
+  fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
   width = true,
   weight = true,
   italic = true,

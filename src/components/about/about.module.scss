@@ -2,7 +2,8 @@
   transition: var(--transition-micro-medium);
 
   &:hover {
-    transform: translateX(var(--static-space-4));
+    transform: translateX(var(--static-space-16)) translateY(-2px);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1), 2px 2px 0 rgb(11, 209, 223);
   }
 }
 
@@ -61,4 +62,81 @@
   .skillsGrid {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
+}
+
+// Update the skill styles with a shiny effect
+
+.skillsIconGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.skillIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skillIcon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 80%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+
+    &::before {
+      opacity: 1;
+      transform: rotate(45deg) translate(50%, 50%);
+    }
+
+    .skillName {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.skillName {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
 }

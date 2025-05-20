@@ -4,12 +4,11 @@ import styles from './Footer.module.scss';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
-
   return (
     <Flex as="footer" fillWidth padding="8" horizontal="center" mobileDirection="column">
       <Flex
         className={styles.mobile}
-        maxWidth="m"
+        maxWidth="xl"
         paddingY="8"
         paddingX="16"
         gap="16"
@@ -19,10 +18,7 @@ export const Footer = () => {
         <Text variant="body-default-s" onBackground="neutral-strong">
           <Text onBackground="neutral-weak">© {currentYear} /</Text>
           <Text paddingX="4">{person.name}</Text>
-          <Text onBackground="neutral-weak">
-            {/* Usage of this template requires attribution. Please don't remove the link to Once UI./ Build your
-            portfolio with <SmartLink>Once UI</SmartLink> */}
-          </Text>
+          <Text onBackground="neutral-weak"></Text>
         </Text>
         <Flex gap="16">
           {social.map(
@@ -35,6 +31,7 @@ export const Footer = () => {
                   tooltip={item.name}
                   size="s"
                   variant="ghost"
+                  className={styles.iconHover}
                 />
               )
           )}

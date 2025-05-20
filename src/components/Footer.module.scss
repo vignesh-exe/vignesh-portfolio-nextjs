@@ -17,6 +17,14 @@
   }
 }
 
+.iconHover {
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+  }
+}
+
 .socialDockWrapper {
   position: relative;
   z-index: 20;

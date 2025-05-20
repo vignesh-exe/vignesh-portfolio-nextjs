@@ -13,19 +13,20 @@ export default function ModelViewerSection() {
       <RevealFx translateY="4" delay={0.3}>
         <div
           style={{
-            width: '300px',
-            height: '300px',
+            width: '1400px',
+            height: '1400px',
             borderRadius: '8px',
             overflow: 'hidden',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.15)'
+            boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+            marginTop: '-320px'
           }}
         >
           <ModelViewer
-            src="/images/vicky.glb"
-            alt="3D Model"
-            ar
-            autoRotate
-            cameraControls
+            src="/images/gaming_laptop.glb"
+            // alt="3D Model"
+            // ar
+            // autoRotate
+            // cameraControls
             exposure="1"
             shadowIntensity="1"
           />

@@ -1,7 +1,5 @@
-import { Logo } from '@/once-ui/components';
 import ShinyText from '@/blocks/TextAnimations/ShinyText/ShinyText';
 import DecryptedText from '@/blocks/TextAnimations/DecryptedText/DecryptedText';
-import GradientText from '@/blocks/TextAnimations/GradientText/GradientText';
 
 const person = {
   firstName: 'Vignesh',
@@ -18,13 +16,8 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: (
-    <>
-      I occasionally write about design, technology, and share thoughts on the intersection of creativity and
-      engineering.
-    </>
-  )
+  title: <>CONTACT - {person.firstName}</>,
+  description: <>Slide into my inbox like a smooth CSS transition.....</>
 };
 
 const social = [
@@ -42,7 +35,7 @@ const social = [
   },
   {
     name: 'Twitter',
-    icon: 'twitter',
+    icon: 'x',
     link: 'https://x.com/VigneshAsh2610'
   },
   {
@@ -64,7 +57,13 @@ const home = {
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: (
-    <ShinyText text="Building bridges between design and code" disabled={false} speed={2} className="custom-class" />
+    <ShinyText
+      text="Building bridges between design and code"
+      disabled={false}
+      speed={2}
+      className="custom-class"
+      style={{ fontSize: '120px' }}
+    />
   ),
 
   featured: {
@@ -78,8 +77,16 @@ const home = {
   },
   subline: (
     <>
-      I'm <DecryptedText text="VIGNESH" animateOn="view" revealDirection="center" speed={140} maxIterations={20} /> , a
-      Front-end Developer at <ShinyText text="ACCENTURE" disabled={false} speed={2} className="custom-class" />
+      I'm <DecryptedText text="VIGNESH" animateOn="view" revealDirection="center" speed={80} maxIterations={20} /> , a
+      Front-End Developer at{' '}
+      <ShinyText
+        text="ACCENTURE"
+        disabled={false}
+        speed={2}
+        className="custom-class super-bold-text"
+        // style={{ fontWeight: 900 }}
+        textStyle={{ fontWeight: 900 }} // If the component has this prop
+      />
     </>
   )
 };

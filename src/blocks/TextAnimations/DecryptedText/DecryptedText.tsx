@@ -1,12 +1,20 @@
 'use client';
 import { useEffect, useState, useRef, ReactNode } from 'react';
 import { motion } from 'framer-motion';
-
 const styles = {
   wrapper: {
     display: 'inline-block',
-    whiteSpace: 'pre-wrap'
+    whiteSpace: 'pre-wrap',
+    background: 'linear-gradient(90deg, #add8e6, #87ceeb, #b0e0e6, #e0ffff)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundSize: '300% 100%',
+    fontWeight: 900,
+    backgroundClip: 'text',
+    color: 'transparent',
+    animation: 'gradient-shift 8s ease infinite'
   },
+
   srOnly: {
     position: 'absolute' as 'absolute',
     width: '1px',
