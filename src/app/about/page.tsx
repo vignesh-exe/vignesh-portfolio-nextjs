@@ -24,7 +24,8 @@ import {
   SiSass,
   SiBootstrap,
   SiAdobephotoshop,
-  SiAdobeillustrator
+  SiAdobeillustrator,
+  SiSap
 } from 'react-icons/si';
 
 export async function generateMetadata() {
@@ -77,7 +78,8 @@ export default function About() {
     { icon: <SiDocker size={40} />, name: 'Docker', color: '#2496ED' },
     { icon: <SiFigma size={40} />, name: 'Figma', color: '#F24E1E' },
     { icon: <SiAdobephotoshop size={40} />, name: 'Photoshop', color: '#31A8FF' },
-    { icon: <SiAdobeillustrator size={40} />, name: 'Illustrator', color: '#FF9A00' }
+    { icon: <SiAdobeillustrator size={40} />, name: 'Illustrator', color: '#FF9A00' },
+    { icon: <SiSap size={40} />, name: 'SAP Logon', color: '#0FAAFF' }
   ];
 
   return (

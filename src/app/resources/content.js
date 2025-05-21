@@ -77,8 +77,8 @@ const home = {
   },
   subline: (
     <>
-      I'm <DecryptedText text="VIGNESH" animateOn="view" revealDirection="center" speed={80} maxIterations={20} /> , a
-      Front-End Developer at{' '}
+      I&apos;m <DecryptedText text="VIGNESH" animateOn="view" revealDirection="center" speed={80} maxIterations={20} />{' '}
+      , Front-End Developer at{' '}
       <ShinyText
         text="ACCENTURE"
         disabled={false}
@@ -113,7 +113,7 @@ const about = {
     description: (
       <div style={{ fontSize: '16px' }}>
         <p>
-          👨‍💻 Hi, I'm Vignesh Ashokan, a 2023 graduate🎓 with a passion for crafting robust frontend systems. As a
+          👨‍💻 Hi, I&apos;m Vignesh Ashokan, a 2023 graduate🎓 with a passion for crafting robust frontend systems. As a
           seasoned{' '}
           <a
             className="text-green-300 hover:text-green-500 duration-300"
@@ -133,8 +133,8 @@ const about = {
           >
             Medium
           </a>
-          , where I delve into the intricacies of software development and technology trends. On a different note, I'm
-          also into photography📸. It's not just a hobby; I see it as a way to{' '}
+          , where I delve into the intricacies of software development and technology trends. On a different note,
+          I&apos;m also into photography📸. It&apos;s not just a hobby; I see it as a way to{' '}
           <span className="text-yellow-500">capture moments🌟📷, tell stories</span>.
         </p>
       </div>

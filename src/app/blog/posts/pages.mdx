@@ -1,55 +1,82 @@
 ---
-title: "Enable or disable pages for your portfolio"
-summary: "Magic Portfolio's RouteGuard component takes care of conditionally rendering pages based on your settings."
-publishedAt: "2025-04-22"
-tag: "Magic Portfolio"
+title: '🧠 What I Learned Working with Sitecore for the First Time'
+summary: 'My journey from React and JavaScript to navigating the complexities of Sitecore as a headless CMS, including challenges, solutions, and key takeaways.'
+publishedAt: '2025-05-20'
+image: '/images/blog/sitecore-experience.jpg'
+tag: 'Development'
 ---
 
-## Enable or disable pages
+# 🧠 What I Learned Working with Sitecore for the First Time
 
-Magic Portfolio's `RouteGuard` component takes care of conditionally rendering pages based on the `routes` object in the `resources/config.js` file.
+Working with Sitecore for the first time was a mix of excitement and confusion. Coming from a frontend background focused on React and JavaScript, jumping into a headless CMS with enterprise-level complexity introduced a steep learning curve — but also real growth.
 
-<CodeBlock
-    marginBottom="16"
-    highlight="6"
-    codeInstances={[
-  {
-    code:
-`const routes = {
-    '/':        true,
-    '/about':   true,
-    '/work':    true,
-    '/blog':    true,
-    '/gallery': false,
-};`,
-    language: "tsx",
-    label: "src/app/resources/config.js"
-  }
-]} />
+In this blog, I'll share the key lessons I learned, challenges I faced, and how I overcame them while building dynamic service flows using Sitecore, React, and Tailwind CSS.
 
-The code above will ensure that the `/gallery` page is not accessible and is not displayed in the navigation.
+## 🧩 What Is Sitecore (in a Nutshell)?
 
-## Add new pages
+Sitecore is a digital experience platform (DXP) that combines content management, personalization, and omnichannel delivery. I worked with Sitecore JSS (JavaScript Services) — its headless integration that allows frontend developers to use frameworks like React or Next.js.
 
-When creating a new page, it needs to be added to the `routes` object in the `resources/config.js` file.
+## 🚧 My Initial Struggles
 
-<CodeBlock
-    marginBottom="16"
-    highlight="6"
-    codeInstances={[
-  {
-    code:
-`const routes = {
-    '/':        true,
-    '/about':   true,
-    '/work':    true,
-    '/blog':    true,
-    '/gallery': false,
-    '/music': true,
-};`,
-    language: "tsx",
-    label: "src/app/resources/config.js"
-  }
-]} />
+### 1. Understanding the Placeholder System
 
-The code above will ensure that the `/music` page is accessible. Users will be able to navigate to it after adding it to the navigation menu in the `components/Header.tsx` file.
+At first, I was confused by how Sitecore handled layout rendering through placeholders like:
+
+```jsx
+<Placeholder name="StepsPlaceHolder" rendering={renderDta} />
+```
+
+It wasn't like typical React routing or props. I had to learn that each Placeholder dynamically injects content based on Sitecore JSON configuration — defined by content authors or backend teams.
+
+#### ✅ What Helped:
+
+- Studied the JSON structure returned by Sitecore.
+- Logged props.rendering.placeholders to see the full hierarchy.
+- Asked senior devs to explain where components were registered.
+
+### 2. Managing Dynamic Steps with Headless Data
+
+I was building a stepper-based service flow for a government portal. The steps and substeps weren't hardcoded — they were passed from Sitecore and mapped to components dynamically.
+
+```jsx
+const Steps = fields?.SelectStep;
+const SubSteps = Steps[activeStep]?.Substeps;
+```
+
+#### ✅ Lesson Learned:
+
+- Always validate if Sitecore data exists before accessing nested properties.
+- Use flexible logic for step navigation: setActiveStep, setActiveSubStep.
+
+### 3. Working with Sitecore Enums
+
+Sitecore's backend configuration involved complex enums like LifeMomentID, ZakatStepName, etc. I had to understand these enums to show or hide components conditionally.
+
+#### ✅ Fix:
+
+- Created a helper mapping file to reference enums cleanly.
+- Used console.log() to trace how each ID matched the UI flow.
+
+## 🛠️ Frontend Tools That Made It Easier
+
+- **Tailwind CSS**: Quick layout and spacing helped me match Figma designs easily.
+- **React DevTools**: Helped debug dynamic props and rerenders from Sitecore props.
+- **Redux**: Used for storing services data across steps.
+
+## 💡 Tips for Sitecore First-Timers
+
+- Inspect JSON outputs carefully — they define your page structure.
+- Understand the placeholder hierarchy — it's the key to dynamic layouts.
+- Work closely with backend/content teams — Sitecore projects require collaboration.
+- Use utility-first styling (like Tailwind) to quickly prototype and adapt layouts.
+- Ask questions early — Sitecore is deep; guidance saves hours.
+
+## 🧭 Final Thoughts
+
+Working with Sitecore taught me how enterprise-level CMSs handle scale and flexibility. The headless architecture gave me frontend freedom while still enforcing strong content structure and dynamic flow management.
+
+It was challenging, but it made me a better developer — more thoughtful about component flexibility, state persistence, and collaboration across disciplines.
+
+## 🙌 Let's Connect
+
+If you're just starting with Sitecore (or React + CMS projects), I'd love to connect and share ideas. Reach out — I'm always open to collaborate or help!

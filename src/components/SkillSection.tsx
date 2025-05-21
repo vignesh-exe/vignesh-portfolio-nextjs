@@ -18,7 +18,8 @@ import {
   SiDocker,
   SiFigma,
   SiAdobephotoshop,
-  SiAdobeillustrator
+  SiAdobeillustrator,
+  SiSap
 } from 'react-icons/si';
 
 export default function SkillsSection() {
@@ -225,6 +226,17 @@ export default function SkillsSection() {
                   alignItems: 'center',
                   margin: '0 20px',
                   filter: 'drop-shadow(0 0 8px rgba(255, 154, 0, 0.3))'
+                }}
+              />
+              <SiSap
+                key="SAP"
+                size={80}
+                color="rgba(49, 168, 255, 0.7)"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  margin: '0 20px',
+                  filter: 'drop-shadow(0 0 8px rgba(49, 168, 255, 0.3))'
                 }}
               />
             </div>
