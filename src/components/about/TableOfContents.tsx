@@ -72,7 +72,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about }) =
                     gap="12"
                     paddingLeft="24"
                     vertical="center"
-                    onClick={() => scrollTo(item, 80)}
+                    onClick={() => (item && typeof item === 'string' ? scrollTo(item, 80) : null)}
                   >
                     <Flex height="1" minWidth="8" background="neutral-strong"></Flex>
                     <Text>{item}</Text>
