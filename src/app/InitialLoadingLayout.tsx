@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Flex, Spinner } from '@/once-ui/components';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation'; // Remove useSearchParams
 import BlurText from '@/blocks/TextAnimations/BlurText/BlurText';
 import Counter from '@/blocks/Components/Counter/Counter';
 import SplitText from '@/blocks/TextAnimations/SplitText/SplitText';
@@ -14,9 +14,16 @@ interface InitialLoadingLayoutProps {
 export default function InitialLoadingLayout({ children }: InitialLoadingLayoutProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingPercentage, setLoadingPercentage] = useState(0);
-  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(() => {
+    // Check if we're in the browser and if initial load was completed before
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('initialLoadComplete') === 'true';
+    }
+    return false;
+  });
+
+  // Only use pathname, not searchParams
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   // Effect for initial page load only
   useEffect(() => {
@@ -40,6 +47,10 @@ export default function InitialLoadingLayout({ children }: InitialLoadingLayoutP
     const timer = setTimeout(() => {
       setIsLoading(false);
       setInitialLoadComplete(true);
+      // Store in sessionStorage to persist across page navigations but not browser refreshes
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('initialLoadComplete', 'true');
+      }
       clearInterval(progressInterval);
     }, 5000);
 
@@ -50,7 +61,7 @@ export default function InitialLoadingLayout({ children }: InitialLoadingLayoutP
   }, []); // Empty dependency array - runs only once on mount
 
   // If not the initial load, don't show loading screen
-  if (!isLoading || (initialLoadComplete && pathname !== undefined)) {
+  if (!isLoading || initialLoadComplete) {
     return <>{children}</>;
   }
 
