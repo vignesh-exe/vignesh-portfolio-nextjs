@@ -43,6 +43,7 @@ export default function Home() {
           fillWidth
           horizontal="center"
           paddingBottom="16"
+          // speed="medium"
           style={{ width: '200%', marginTop: '60px' }}
         >
           <Heading wrap="balance" variant="display-strong-l" style={{ textAlign: 'center' }}>
