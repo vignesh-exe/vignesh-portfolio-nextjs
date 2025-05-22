@@ -1,6 +1,10 @@
-import { Column, Heading, Text } from "@/once-ui/components";
+'use client';
 
-export default function NotFound() {
+import { Suspense } from 'react';
+import { Column, Heading, Text } from '@/once-ui/components';
+
+// Content component that might use hooks internally
+function NotFoundContent() {
   return (
     <Column as="section" fill center paddingBottom="160">
       <Text marginBottom="s" variant="display-strong-xl">
@@ -13,3 +17,21 @@ export default function NotFound() {
     </Column>
   );
 }
+
+// Main component with Suspense boundary
+export default function NotFound() {
+  return (
+    <Suspense
+      fallback={
+        <Column as="section" fill center paddingBottom="160">
+          <Text>Loading...</Text>
+        </Column>
+      }
+    >
+      <NotFoundContent />
+    </Suspense>
+  );
+}
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
