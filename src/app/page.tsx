@@ -6,7 +6,7 @@ import { home, about, person, newsletter, blog, work } from '@/app/resources/con
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { Meta, Schema } from '@/once-ui/modules';
-import TextPressure from '@/blocks/TextAnimations/TextPressure/TextPressure';
+import ThemedTextPressure from '@/app/ThemedTextPressure'; // Import the new component
 import ModelViewerSection from '@/blocks/Components/ModelViewerSection';
 import Magnet from '@/blocks/Animations/Magnet/Magnet';
 import SkillSection from '@/components/SkillSection';
@@ -46,18 +46,7 @@ export default function Home() {
           style={{ width: '200%', marginTop: '60px' }}
         >
           <Heading wrap="balance" variant="display-strong-l" style={{ textAlign: 'center' }}>
-            <TextPressure
-              text="Hello!!!"
-              flex={true}
-              alpha={false}
-              stroke={false}
-              width={false}
-              weight={true}
-              italic={false}
-              textColor="#ffffff"
-              strokeColor="#ff0000"
-              minFontSize={450}
-            />
+            <ThemedTextPressure text="Hello!!!" minFontSize={450} />
           </Heading>
         </RevealFx>
 

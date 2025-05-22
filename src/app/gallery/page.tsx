@@ -1,8 +1,8 @@
-import { Flex } from "@/once-ui/components";
-import MasonryGrid from "@/components/gallery/MasonryGrid";
-import { baseURL } from "@/app/resources";
-import { gallery, person } from "@/app/resources/content";
-import { Meta, Schema } from "@/once-ui/modules";
+import { Flex } from '@/once-ui/components';
+import { baseURL } from '@/app/resources';
+import { gallery, person } from '@/app/resources/content';
+import { Meta, Schema } from '@/once-ui/modules';
+import CircularGallery from '@/blocks/Components/CircularGallery/CircularGallery';
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -10,13 +10,13 @@ export async function generateMetadata() {
     description: gallery.description,
     baseURL: baseURL,
     image: `${baseURL}/og?title=${encodeURIComponent(gallery.title)}`,
-    path: gallery.path,
+    path: gallery.path
   });
 }
 
 export default function Gallery() {
   return (
-    <Flex maxWidth="l">
+    <Flex maxWidth="xl" direction="column" fillWidth>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -27,10 +27,13 @@ export default function Gallery() {
         author={{
           name: person.name,
           url: `${baseURL}${gallery.path}`,
-          image: `${baseURL}${person.avatar}`,
+          image: `${baseURL}${person.avatar}`
         }}
       />
-      <MasonryGrid />
+
+      <div style={{ height: '900px', position: 'relative', width: '100%' }}>
+        <CircularGallery bend={0} textColor="#ffffff" borderRadius={0.08} />
+      </div>
     </Flex>
   );
 }
