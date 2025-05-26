@@ -52,7 +52,7 @@ export default function InitialLoadingLayout({ children }: InitialLoadingLayoutP
         sessionStorage.setItem('initialLoadComplete', 'true');
       }
       clearInterval(progressInterval);
-    }, 5000);
+    }, 6000);
 
     return () => {
       clearTimeout(timer);

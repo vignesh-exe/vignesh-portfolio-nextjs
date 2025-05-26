@@ -80,7 +80,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             size="s"
             prefixIcon="chevronLeft"
           >
-            Posts
+            Back
           </Button>
           <Heading variant="display-strong-s">{post.metadata.title}</Heading>
           <Row gap="12" vertical="center">
