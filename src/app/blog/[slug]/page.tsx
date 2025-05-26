@@ -72,10 +72,17 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
               image: `${baseURL}${person.avatar}`
             }}
           />
-
-          <Heading variant="display-strong-s" style={{ marginTop: '35px' }}>
-            {post.metadata.title}
-          </Heading>
+          <Button
+            data-border="rounded"
+            href="/blog"
+            weight="default"
+            variant="tertiary"
+            size="s"
+            prefixIcon="chevronLeft"
+          >
+            Posts
+          </Button>
+          <Heading variant="display-strong-s">{post.metadata.title}</Heading>
           <Row gap="12" vertical="center">
             {avatars.length > 0 && <AvatarGroup size="s" avatars={avatars} />}
             <Text variant="body-default-s" onBackground="neutral-weak">
