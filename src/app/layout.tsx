@@ -7,6 +7,8 @@ import { Background, Column, Flex, ThemeProvider, ToastProvider } from '@/once-u
 import { opacity, SpacingToken } from '@/once-ui/types';
 import { Meta } from '@/once-ui/modules';
 import InitialLoadingLayout from '@/app/InitialLoadingLayout';
+import { ScrollToTop } from '@/once-ui/components/ScrollToTop';
+import { IconButton } from '@/once-ui/components';
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -116,6 +118,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 </Flex>
               </Flex>
               <Footer />
+              <ScrollToTop offset={500}>
+                <IconButton icon="chevronUp" />
+              </ScrollToTop>
             </InitialLoadingLayout>
           </Column>
         </ToastProvider>

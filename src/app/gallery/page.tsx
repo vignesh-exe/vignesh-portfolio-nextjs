@@ -2,7 +2,7 @@ import { Flex } from '@/once-ui/components';
 import { baseURL } from '@/app/resources';
 import { gallery, person } from '@/app/resources/content';
 import { Meta, Schema } from '@/once-ui/modules';
-import CircularGallery from '@/blocks/Components/CircularGallery/CircularGallery';
+import RollingGallery from '@/blocks/Components/RollingGallery/RollingGallery';
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -30,10 +30,7 @@ export default function Gallery() {
           image: `${baseURL}${person.avatar}`
         }}
       />
-
-      <div style={{ height: '900px', position: 'relative', width: '100%' }}>
-        <CircularGallery bend={0} textColor="#ffffff" borderRadius={0.08} />
-      </div>
+      <RollingGallery autoplay={true} pauseOnHover={true} />
     </Flex>
   );
 }
