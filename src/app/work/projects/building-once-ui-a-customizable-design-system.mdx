@@ -50,43 +50,18 @@ Developed a comprehensive digital platform for Qatar's Ministry of Communication
 - **Material UI**: Utilized Google's design system to create an intuitive, accessible interface that meets government accessibility standards.
 - **GraphQL**: Developed efficient API layer for real-time data fetching and seamless integration with government databases and external services.
 
-## Technical Architecture
-
-### Frontend Implementation
-
-```typescript
-// State management for government services
-interface GovernmentServiceState {
-  services: Service[];
-  userPermissions: Permission[];
-  activeRequests: ServiceRequest[];
-  analytics: AnalyticsData;
-}
-
-// Real-time dashboard component
-const MCITDashboard: React.FC = () => {
-  const { data, loading } = useQuery(GET_DASHBOARD_METRICS);
-  const dispatch = useAppDispatch();
-
-  return (
-    <Grid container spacing={3}>
-      <ServiceMetrics data={data?.serviceMetrics} />
-      <NetworkStatus status={data?.networkHealth} />
-      <CitizenEngagement metrics={data?.engagement} />
-    </Grid>
-  );
-};
-
-
 ## 🔐 Security Implementation
 
 ### ✅ JWT Token Management
+
 Secure token-based authentication with automatic refresh mechanisms.
 
 ### ✅ Data Encryption
+
 End-to-end encryption for sensitive government communications.
 
 ### ✅ API Rate Limiting
+
 Protection against abuse and ensuring fair resource allocation.
 
 ---
@@ -167,5 +142,6 @@ The Qatar MCIT platform has become a cornerstone of Qatar's digital government i
 The project has significantly contributed to Qatar's National Vision 2030 digital transformation goals, positioning the country as a leader in government technology innovation in the Middle East.
 """
 
+```
 
 ```

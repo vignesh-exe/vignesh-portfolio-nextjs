@@ -44,9 +44,9 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
         case 'medium':
           return '2s';
         case 'slow':
-          return '4s';
-        default:
           return '3s';
+        default:
+          return '2s';
       }
     };
 
