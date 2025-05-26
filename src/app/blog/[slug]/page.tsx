@@ -73,7 +73,9 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             }}
           />
 
-          <Heading variant="display-strong-s">{post.metadata.title}</Heading>
+          <Heading variant="display-strong-s" style={{ marginTop: '35px' }}>
+            {post.metadata.title}
+          </Heading>
           <Row gap="12" vertical="center">
             {avatars.length > 0 && <AvatarGroup size="s" avatars={avatars} />}
             <Text variant="body-default-s" onBackground="neutral-weak">

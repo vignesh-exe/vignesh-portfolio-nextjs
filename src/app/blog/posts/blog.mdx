@@ -1,71 +1,149 @@
 ---
-title: "Create, edit and delete blog posts"
-summary: "Create, edit and delete posts in the blog section of your Magic Portfolio."
-publishedAt: "2025-03-17"
-tag: "Magic Portfolio"
+title: '🎨 How to Design and Prototype a UI in Figma (Then Code It in React + Tailwind)'
+description: 'Learn my complete design-to-code workflow using Figma, React, and Tailwind CSS. From wireframes to fully functional components with real-world tips from my internship experience.'
+publishedAt: '2025-05-26'
+author: 'Vignesh Ashokan'
+tags: ['figma', 'react', 'tailwind', 'ui-design', 'frontend', 'workflow', 'components']
+featured: true
+image: '/images/blog/figma-react-tailwind/cover.jpg'
+tag: 'Development'
+readingTime: '8 min read'
+category: 'Tutorial'
+slug: 'figma-to-react-tailwind-workflow'
 ---
 
-## Manage posts
+Figma has become the go-to tool for modern UI/UX design. Combine that with React and Tailwind CSS, and you've got a lightning-fast workflow from idea to fully functional interface. In this blog, I'll walk you through my design-to-code process, using real practices I applied during my internship.
 
-You can create, edit and delete posts by adding, modifying or removing `*.mdx` files in the `src/app/blog/posts` directory.
+## 🛠️ What You'll Learn
 
-## Frontmatter
+- How to design clean UIs in Figma with proper component structure
+- How to break down designs into reusable React components
+- How to style your components efficiently using Tailwind CSS
+- Pro tips I picked up during real-world projects
+- Advanced workflow optimizations for team collaboration
 
-The frontmatter is used to set the post's metadata: title, description, image, and tags. It's used in the post's page and in meta- and open graph tags.
+## 🔧 Step 1: Design Your UI in Figma
 
-<CodeBlock
-    marginBottom="16"
-    codeInstances={[
-      {
-        code:
-`---
-title: "Arriving to a new milestone in my career"
-publishedAt: "2024-04-08"
-image: "/images/gallery/img-02.jpg"
-summary: "Every career is a journey, filled with challenges, growth, and those significant moments that mark a shift in our path."
-tag: "Journal"
----`,
-        language: "tsx",
-        label: "src/app/blog/posts/post-1.mdx"
-      }
-    ]}
-/>
+Start with a wireframe or layout idea. For this demo, let's say I'm designing a **Login Page** that needs to work across all devices.
 
-## MDX syntax
+### ✏️ My Figma Layout Includes:
 
-You can use MDX to write the content of your posts. It helps you write rich and dynamic content with minimal code. Some MDX elements will be automatically transformed to Once UI components to integrate better in the design and add additional functionality.
+- **Logo + Welcome Text** - Brand identity and user greeting
+- **Input fields** for Email & Password with proper states
+- **Primary Login Button** with hover and focus states
+- **Secondary Link** to Sign Up page
+- **Mobile-first layout** that scales up beautifully
 
-## Custom components
+> **💡 Internship Tip:** Use auto-layout for buttons, forms, and containers. It saves time when handing off to developers or resizing for mobile. Set up your spacing tokens early!
 
-You can use custom components in MDX files, but you need to import them first in the `src/components/mdx.tsx` file.
+### Figma Best Practices I Follow:
 
-<CodeBlock
-    marginBottom="16"
-    highlight="11-12"
-    codeInstances={[
-      {
-        code:
-`const components = {
-    p: createParagraph as any,
-    h1: createHeading(1) as any,
-    h2: createHeading(2) as any,
-    h3: createHeading(3) as any,
-    h4: createHeading(4) as any,
-    h5: createHeading(5) as any,
-    h6: createHeading(6) as any,
-    img: createImage as any,
-    a: CustomLink as any,
-    Table,
-    CodeBlock,
-};`,
-        language: "tsx",
-        label: "src/components/mdx.tsx"
-      }
-    ]}
-/>
+1. **Use Components & Variants** - Create button components with different states
+2. **Consistent Spacing** - Use 8px grid system (8, 16, 24, 32px)
+3. **Typography Scale** - Define text styles (14px, 16px, 20px, 24px)
+4. **Color Tokens** - Create a proper color palette with semantic names
 
-As you can see, the `Table` and `CodeBlock` components are already imported and available for use. You can add more by simply importing them to this file and passing them to the `components` object.
+## 🧩 Step 2: Break It Down Into Components
 
-## Hot reload
+From the Figma layout, I extract these reusable components:
 
-Hot reload of MDX files is currently not supported, but we're working on it.
+- `<AuthLayout />` - Overall page structure
+- `<LoginForm />` - Main form container
+- `<InputField />` - Reusable input with validation
+- `<PrimaryButton />` - Button with variants
+- `<Logo />` - Brand component
+
+Component-driven thinking makes it easier to build, reuse, and test each part. This approach also makes handoffs to other developers seamless.
+
+> **💡 Pro Tip:** Name your Figma components exactly as you plan to name your React components. This makes the design-to-code handoff much smoother.
+
+## 💻 Step 3: Code It with React + Tailwind CSS
+
+Let's implement each component step by step, starting with the most reusable ones:
+
+### InputField Component
+
+```jsx
+// components/ui/InputField.jsx
+import { useState, forwardRef } from 'react';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+
+const InputField = forwardRef(
+  ({ type = 'text', label, placeholder, error, helperText, required = false, className = '', ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [focused, setFocused] = useState(false);
+
+    const isPassword = type === 'password';
+    const inputType = isPassword && showPassword ? 'text' : type;
+
+    return (
+      <div className="space-y-1">
+        {label && (
+          <label className="block text-sm font-medium text-gray-700">
+            {label}
+            {required && <span className="text-red-500 ml-1">*</span>}
+          </label>
+        )}
+
+        <div className="relative">
+          <input
+            ref={ref}
+            type={inputType}
+            placeholder={placeholder}
+            className={`
+            w-full px-4 py-3 rounded-lg border transition-all duration-200
+            placeholder:text-gray-400
+            ${
+              error
+                ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
+                : focused
+                ? 'border-blue-500 ring-2 ring-blue-500 ring-opacity-20'
+                : 'border-gray-300 hover:border-gray-400'
+            }
+            focus:outline-none focus:ring-2 focus:ring-opacity-20
+            disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed
+            ${className}
+          `}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            {...props}
+          />
+
+          {isPassword && (
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+              ) : (
+                <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+              )}
+            </button>
+          )}
+        </div>
+
+        {error && (
+          <p className="text-sm text-red-600 flex items-center gap-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            {error}
+          </p>
+        )}
+
+        {helperText && !error && <p className="text-sm text-gray-500">{helperText}</p>}
+      </div>
+    );
+  }
+);
+
+InputField.displayName = 'InputField';
+
+export default InputField;
+```
