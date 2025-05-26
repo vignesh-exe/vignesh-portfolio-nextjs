@@ -73,7 +73,7 @@ const home = {
         Current project: <strong className="ml-4">QATAR MCIT</strong>
       </>
     ),
-    href: '/work/building-once-ui-a-customizable-design-system'
+    href: '/work/qatar-mcit'
   },
   subline: (
     <>
