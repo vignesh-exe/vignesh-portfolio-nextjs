@@ -148,7 +148,7 @@ export default function About() {
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
               rotationInterval={3000}
               style={{
-                background: 'rgba(205, 212, 222, 0.33)' /* blue-300 with transparency */,
+                background: 'rgba(0, 188, 231, 0.68)' /* blue-300 with transparency */,
                 backdropFilter: 'blur(8px)',
                 WebkitBackdropFilter: 'blur(8px)' /* For Safari */,
                 border: '1px solid rgba(16, 153, 183, 0.93)',
@@ -278,32 +278,6 @@ export default function About() {
                         </Text>
                       ))}
                     </Column>
-                    {experience.images.length > 0 && (
-                      <Flex fillWidth paddingTop="m" paddingLeft="40" wrap>
-                        {experience.images.map((image, index) => (
-                          <Flex
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            //@ts-ignore
-                            minWidth={image.width}
-                            //@ts-ignore
-                            height={image.height}
-                          >
-                            <SmartImage
-                              enlarge
-                              radius="m"
-                              //@ts-ignore
-                              sizes={image.width.toString()}
-                              //@ts-ignore
-                              alt={image.alt}
-                              //@ts-ignore
-                              src={image.src}
-                            />
-                          </Flex>
-                        ))}
-                      </Flex>
-                    )}
                   </Column>
                 ))}
               </Column>
