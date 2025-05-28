@@ -124,10 +124,8 @@ export default function Home() {
       <div style={{ marginTop: '-135px', marginBottom: '-230px' }}>
         <ModelViewerSection />
       </div>
-      <Column fillWidth paddingY="24" gap="xl" horizontal="center" align="center">
-        <div style={{ width: '200%' }}>
-          <SkillSection />
-        </div>
+      <Column maxWidth="l" gap="m" horizontal="center" align="center">
+        <SkillSection />
       </Column>
       {/* Blog Section */}
       {routes['/blog'] && (
