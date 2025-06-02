@@ -5,9 +5,9 @@ import { opacity, SpacingToken } from '@/once-ui/types';
 import { useState, useEffect } from 'react';
 
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_unzhg96',
-  TEMPLATE_ID: 'template_gqunqh5',
-  PUBLIC_KEY: '2auxZ3JcwAulM_gik'
+  SERVICE_ID: 'service_nj5lw86',
+  TEMPLATE_ID: 'template_gu4okwg',
+  PUBLIC_KEY: 'tUEMJW_jP7e1ZtJqE'
 };
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T {
