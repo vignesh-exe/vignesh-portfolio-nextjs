@@ -2,7 +2,7 @@
 import emailjs from '@emailjs/browser';
 import { Button, Flex, Heading, Input, Text, Background, Column } from '@/once-ui/components';
 import { opacity, SpacingToken } from '@/once-ui/types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_unzhg96',
@@ -39,6 +39,11 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
     name: boolean;
   }>({ email: false, name: false });
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+  }, []);
+
   const validateEmail = (email: string): boolean => {
     if (email === '') {
       return false;
@@ -51,23 +56,38 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
     return name.trim() !== '';
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-    if (!validateEmail(value)) {
+  // Simplified email validation function
+  const validateEmailField = (value: string) => {
+    if (touched.email && !validateEmail(value)) {
       setEmailError('Please enter a valid email address.');
     } else {
       setEmailError('');
     }
   };
 
+  // Debounced email validation
+  const debouncedEmailValidation = debounce(validateEmailField, 500);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    // Only validate if field has been touched
+    if (touched.email) {
+      debouncedEmailValidation(value);
+    }
+  };
+
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setName(value);
-    if (!validateName(value)) {
-      setNameError('Please enter your name.');
-    } else {
-      setNameError('');
+
+    if (touched.name) {
+      if (!validateName(value)) {
+        setNameError('Please enter your name.');
+      } else {
+        setNameError('');
+      }
     }
   };
 
@@ -75,34 +95,38 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
     setDescription(e.target.value);
   };
 
-  const debouncedHandleEmailChange = debounce(handleEmailChange, 2000);
-
   const handleEmailBlur = () => {
     setTouched({ ...touched, email: true });
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-    }
+    validateEmailField(email);
   };
 
   const handleNameBlur = () => {
     setTouched({ ...touched, name: true });
     if (!validateName(name)) {
       setNameError('Please enter your name.');
+    } else {
+      setNameError('');
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Mark all fields as touched
+    setTouched({ email: true, name: true });
+
     // Validate form before submission
-    if (!validateEmail(email) || !validateName(name)) {
-      setTouched({ email: true, name: true });
-      if (!validateEmail(email)) {
-        setEmailError('Please enter a valid email address.');
-      }
-      if (!validateName(name)) {
-        setNameError('Please enter your name.');
-      }
+    const isEmailValid = validateEmail(email);
+    const isNameValid = validateName(name);
+
+    if (!isEmailValid) {
+      setEmailError('Please enter a valid email address.');
+    }
+    if (!isNameValid) {
+      setNameError('Please enter your name.');
+    }
+
+    if (!isEmailValid || !isNameValid) {
       return;
     }
 
@@ -118,12 +142,16 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
         to_email: 'vigneshashokann@gmail.com'
       };
 
+      console.log('Sending email with params:', templateParams);
+
       const result = await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID,
         templateParams,
         EMAILJS_CONFIG.PUBLIC_KEY
       );
+
+      console.log('EmailJS result:', result);
 
       if (result.status === 200) {
         setSubmitMessage('Thank you! Your message has been sent successfully.');
@@ -132,6 +160,8 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
         setEmail('');
         setDescription('');
         setTouched({ email: false, name: false });
+        setEmailError('');
+        setNameError('');
       }
     } catch (error) {
       console.error('EmailJS Error:', error);
@@ -258,13 +288,7 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
             label="Email"
             required
             value={email}
-            onChange={e => {
-              if (emailError) {
-                handleEmailChange(e);
-              } else {
-                debouncedHandleEmailChange(e);
-              }
-            }}
+            onChange={handleEmailChange} // Simplified - just use the main handler
             onBlur={handleEmailBlur}
             errorMessage={emailError}
             disabled={isSubmitting}
@@ -280,12 +304,7 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
             onChange={handleDescriptionChange}
             disabled={isSubmitting}
           />
-          <Button
-            type="submit"
-            size="m"
-            fillWidth
-            disabled={isSubmitting || !validateEmail(email) || !validateName(name)}
-          >
+          <Button type="submit" size="m" fillWidth disabled={isSubmitting}>
             {isSubmitting ? 'Sending...' : 'Send'}
           </Button>
         </Column>
