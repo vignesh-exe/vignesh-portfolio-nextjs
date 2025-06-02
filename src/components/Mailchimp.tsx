@@ -1,9 +1,14 @@
 'use client';
-
-import { mailchimp } from '@/app/resources';
+import emailjs from '@emailjs/browser';
 import { Button, Flex, Heading, Input, Text, Background, Column } from '@/once-ui/components';
 import { opacity, SpacingToken } from '@/once-ui/types';
 import { useState } from 'react';
+
+const EMAILJS_CONFIG = {
+  SERVICE_ID: 'service_unzhg96',
+  TEMPLATE_ID: 'template_gqunqh5',
+  PUBLIC_KEY: '2auxZ3JcwAulM_gik'
+};
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T {
   let timeout: ReturnType<typeof setTimeout>;
@@ -19,12 +24,16 @@ type NewsletterProps = {
   description: string | JSX.Element;
 };
 
+import { mailchimp } from '@/app/resources';
+
 export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitMessage, setSubmitMessage] = useState<string>('');
   const [touched, setTouched] = useState<{
     email: boolean;
     name: boolean;
@@ -79,6 +88,56 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
     setTouched({ ...touched, name: true });
     if (!validateName(name)) {
       setNameError('Please enter your name.');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate form before submission
+    if (!validateEmail(email) || !validateName(name)) {
+      setTouched({ email: true, name: true });
+      if (!validateEmail(email)) {
+        setEmailError('Please enter a valid email address.');
+      }
+      if (!validateName(name)) {
+        setNameError('Please enter your name.');
+      }
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      // EmailJS template parameters
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        message: description || 'No additional message provided',
+        to_email: 'vigneshashokann@gmail.com'
+      };
+
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+
+      if (result.status === 200) {
+        setSubmitMessage('Thank you! Your message has been sent successfully.');
+        // Reset form
+        setName('');
+        setEmail('');
+        setDescription('');
+        setTouched({ email: false, name: false });
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitMessage('Sorry, there was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -150,41 +209,55 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
       >
         {newsletter.description}
       </Text>
+
+      {submitMessage && (
+        <Text
+          style={{
+            position: 'relative',
+            padding: '8px 16px',
+            borderRadius: '4px',
+            backgroundColor: submitMessage.includes('error') ? 'rgba(239, 68, 68, 0.1)' : 'rgba(34, 197, 94, 0.1)',
+            color: submitMessage.includes('error') ? 'rgb(239, 68, 68)' : 'rgb(34, 197, 94)',
+            border: `1px solid ${submitMessage.includes('error') ? 'rgba(239, 68, 68, 0.3)' : 'rgba(34, 197, 94, 0.3)'}`
+          }}
+          marginBottom="m"
+        >
+          {submitMessage}
+        </Text>
+      )}
+
       <form
         style={{
           width: '100%',
           display: 'flex',
           justifyContent: 'center'
         }}
-        action={mailchimp.action}
-        method="post"
-        id="mc-embedded-subscribe-form"
-        name="mc-embedded-subscribe-form"
+        onSubmit={handleSubmit}
       >
-        <Column id="mc_embed_signup_scroll" fillWidth maxWidth={24} gap="16">
+        <Column fillWidth maxWidth={24} gap="16">
           <Input
             formNoValidate
             labelAsPlaceholder
-            id="mce-NAME"
-            name="NAME"
+            id="contact-name"
+            name="name"
             type="text"
             label="Name"
             required
-            onChange={e => {
-              handleNameChange(e);
-            }}
+            value={name}
+            onChange={handleNameChange}
             onBlur={handleNameBlur}
             errorMessage={nameError}
+            disabled={isSubmitting}
           />
-
           <Input
             formNoValidate
             labelAsPlaceholder
-            id="mce-EMAIL"
-            name="EMAIL"
+            id="contact-email"
+            name="email"
             type="email"
             label="Email"
             required
+            value={email}
             onChange={e => {
               if (emailError) {
                 handleEmailChange(e);
@@ -194,33 +267,26 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
             }}
             onBlur={handleEmailBlur}
             errorMessage={emailError}
+            disabled={isSubmitting}
           />
-
           <Input
             formNoValidate
             labelAsPlaceholder
-            id="mce-DESCRIPTION"
-            name="DESCRIPTION"
+            id="contact-description"
+            name="description"
             type="text"
-            label="Description"
+            label="Message (Optional)"
+            value={description}
             onChange={handleDescriptionChange}
+            disabled={isSubmitting}
           />
-
-          <div style={{ display: 'none' }}>
-            <input type="checkbox" readOnly name="group[3492][1]" id="mce-group[3492]-3492-0" value="" checked />
-          </div>
-
-          <div id="mce-responses" className="clearfalse">
-            <div className="response" id="mce-error-response" style={{ display: 'none' }}></div>
-            <div className="response" id="mce-success-response" style={{ display: 'none' }}></div>
-          </div>
-
-          <div aria-hidden="true" style={{ position: 'absolute', left: '-5000px' }}>
-            <input type="text" readOnly name="b_c1a5a210340eb6c7bff33b2ba_0462d244aa" tabIndex={-1} value="" />
-          </div>
-
-          <Button id="mc-embedded-subscribe" value="Send" size="m" fillWidth>
-            Send
+          <Button
+            type="submit"
+            size="m"
+            fillWidth
+            disabled={isSubmitting || !validateEmail(email) || !validateName(name)}
+          >
+            {isSubmitting ? 'Sending...' : 'Send'}
           </Button>
         </Column>
       </form>

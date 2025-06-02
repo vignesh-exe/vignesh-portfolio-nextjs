@@ -249,7 +249,13 @@ export default function About() {
             >
               <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
               <Flex paddingX="8">View Resume</Flex>
-              <IconButton href={about.calendar.link} data-border="rounded" variant="secondary" icon="chevronRight" />
+              <IconButton
+                href={about.calendar.link}
+                data-border="rounded"
+                variant="secondary"
+                icon="chevronRight"
+                download="Vignesh_Ashokan_Resume.pdf"
+              />
             </Flex>
           )}
           {about.work.display && (

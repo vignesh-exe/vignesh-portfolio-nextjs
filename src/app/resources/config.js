@@ -1,5 +1,4 @@
-// IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL = 'https://demo.magic-portfolio.com';
+const baseURL = 'https://vigneshash.netlify.app/';
 
 const routes = {
   '/': true,

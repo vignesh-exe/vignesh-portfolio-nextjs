@@ -105,7 +105,7 @@ const about = {
   },
   calendar: {
     display: true,
-    link: 'https://cal.com'
+    link: '/images/vignesh-ashokan.pdf'
   },
   intro: {
     display: true,
