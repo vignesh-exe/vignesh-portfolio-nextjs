@@ -56,7 +56,7 @@ export default function SkillsSection() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  margin: '0 20px',
+                  margin: '0 0px',
                   filter: 'drop-shadow(0 0 8px rgba(97, 218, 251, 0.3))'
                 }}
               />
@@ -235,7 +235,7 @@ export default function SkillsSection() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  margin: '0 20px',
+                  margin: '0px 20px',
                   filter: 'drop-shadow(0 0 8px rgba(49, 168, 255, 0.3))'
                 }}
               />
