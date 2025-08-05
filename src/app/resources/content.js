@@ -1,59 +1,59 @@
-import ShinyText from '@/blocks/TextAnimations/ShinyText/ShinyText';
-import DecryptedText from '@/blocks/TextAnimations/DecryptedText/DecryptedText';
+import ShinyText from "@/blocks/TextAnimations/ShinyText/ShinyText";
+import DecryptedText from "@/blocks/TextAnimations/DecryptedText/DecryptedText";
 
 const person = {
-  firstName: 'Vignesh',
-  lastName: 'Ashokan',
+  firstName: "Vignesh",
+  lastName: "Ashokan",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: 'Front-End Developer',
-  avatar: '/images/avatar.PNG',
-  email: 'mailto:vigneshashokann@gmail.com',
-  location: 'Asia/Kolkata',
-  languages: ['English'] // optional: Leave the array empty if you don't want to display languages
+  role: "Front-End Developer and ios Developer",
+  avatar: "/images/avatar.PNG",
+  email: "mailto:vigneshashokann@gmail.com",
+  location: "Asia/Kolkata",
+  languages: ["English"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
   display: true,
   title: <>CONTACT - {person.firstName}</>,
-  description: <>Slide into my inbox like a smooth CSS transition.....</>
+  description: <>Slide into my inbox like a smooth CSS transition.....</>,
 };
 
 const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   {
-    name: 'GitHub',
-    icon: 'github',
-    link: 'https://github.com/vignesh-exe'
+    name: "GitHub",
+    icon: "github",
+    link: "https://github.com/vignesh-exe",
   },
   {
-    name: 'LinkedIn',
-    icon: 'linkedin',
-    link: 'https://www.linkedin.com/in/vignesh-ashokan-08a619276/'
+    name: "LinkedIn",
+    icon: "linkedin",
+    link: "https://www.linkedin.com/in/vignesh-ashokan-08a619276/",
   },
   {
-    name: 'Twitter',
-    icon: 'x',
-    link: 'https://x.com/VigneshAsh2610'
+    name: "Twitter",
+    icon: "x",
+    link: "https://x.com/VigneshAsh2610",
   },
   {
-    name: 'Email',
-    icon: 'email',
-    link: `mailto:${person.email}`
+    name: "Email",
+    icon: "email",
+    link: `mailto:${person.email}`,
   },
   {
-    name: 'Medium',
-    icon: 'medium',
-    link: 'https://medium.com/@vigneshashokann'
-  }
+    name: "Medium",
+    icon: "medium",
+    link: "https://medium.com/@vigneshashokann",
+  },
 ];
 
 const home = {
-  path: '/',
-  image: '/images/og/home.jpg',
-  label: 'Home',
+  path: "/",
+  image: "/images/og/home.jpg",
+  label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: (
@@ -62,7 +62,7 @@ const home = {
       disabled={false}
       speed={2}
       className="custom-class"
-      style={{ fontSize: '120px' }}
+      style={{ fontSize: "120px" }}
     />
   ),
 
@@ -73,12 +73,19 @@ const home = {
         Current project: <strong className="ml-4">QATAR MCIT</strong>
       </>
     ),
-    href: '/work/qatar-mcit'
+    href: "/work/qatar-mcit",
   },
   subline: (
     <>
-      I&apos;m <DecryptedText text="VIGNESH" animateOn="view" revealDirection="center" speed={80} maxIterations={20} />{' '}
-      , Front-End Developer at{' '}
+      I&apos;m{" "}
+      <DecryptedText
+        text="VIGNESH"
+        animateOn="view"
+        revealDirection="center"
+        speed={80}
+        maxIterations={20}
+      />{" "}
+      , Front-End Developer and ios Developer at{" "}
       <ShinyText
         text="ACCENTURE"
         disabled={false}
@@ -88,33 +95,33 @@ const home = {
         textStyle={{ fontWeight: 900 }} // If the component has this prop
       />
     </>
-  )
+  ),
 };
 
 const about = {
-  path: '/about',
-  label: 'About',
+  path: "/about",
+  label: "About",
   title: `About – ${person.name}`,
   description: `Meet ${person.name}, ${person.role} from ${person.location}`,
   tableOfContent: {
     display: true,
-    subItems: false
+    subItems: false,
   },
   avatar: {
-    display: true
+    display: true,
   },
   calendar: {
     display: true,
-    link: '/images/vignesh-ashokan.pdf'
+    link: "/images/vignesh-ashokan.pdf",
   },
   intro: {
     display: true,
-    title: 'Introduction',
+    title: "Introduction",
     description: (
-      <div style={{ fontSize: '16px' }}>
+      <div style={{ fontSize: "16px" }}>
         <p>
-          👨‍💻 Hi, I&apos;m Vignesh Ashokan, a 2023 graduate🎓 with a passion for crafting robust frontend systems. As a
-          seasoned{' '}
+          👨‍💻 Hi, I&apos;m Vignesh Ashokan, a 2023 graduate🎓 with a passion for
+          crafting robust frontend systems. As a seasoned{" "}
           <a
             className="text-green-300 hover:text-green-500 duration-300"
             href="https://www.linkedin.com/in/vignesh-ashokan-08a619276/"
@@ -122,9 +129,9 @@ const about = {
             rel="noreferrer"
           >
             Software developer
-          </a>{' '}
-          I specialize in React.JS and tailwind css 🚀. ✍️ Beyond coding, I love sharing my insights and experiences
-          through engaging blogs on{' '}
+          </a>{" "}
+          I specialize in React.JS and Tailwind CSS 🚀. ✍️ Beyond coding, I love
+          sharing my insights and experiences through engaging blogs on{" "}
           <a
             className="text-purple-300 hover:text-purple-400 duration-300"
             href="https://medium.com/@vigneshashokann"
@@ -133,16 +140,25 @@ const about = {
           >
             Medium
           </a>
-          , where I delve into the intricacies of software development and technology trends. On a different note,
-          I&apos;m also into photography📸. It&apos;s not just a hobby; I see it as a way to{' '}
-          <span className="text-yellow-500">capture moments🌟📷, tell stories</span>.
+          , where I delve into the intricacies of software development and
+          technology trends. Lately, I’ve also been expanding into{" "}
+          <span className="text-blue-400">iOS development</span> using{" "}
+          <span className="text-white">SwiftUI</span> and{" "}
+          <span className="text-blue-300">Xcode</span> 🧑‍💻📱, building intuitive
+          and responsive native mobile apps that align with Apple’s design
+          philosophy. On a different note, I&apos;m also into photography📸.
+          It&apos;s not just a hobby; I see it as a way to{" "}
+          <span className="text-yellow-500">
+            capture moments🌟📷, tell stories
+          </span>
+          .
         </p>
       </div>
-    )
+    ),
   },
   work: {
     display: true, // set to false to hide this section
-    title: 'Work Experience',
+    title: "Work Experience",
     experiences: [
       {
         company: (
@@ -155,32 +171,36 @@ const about = {
             Accenture
           </a>
         ),
-        timeframe: 'October 2023 - Present',
-        role: 'Associate Software Engineer',
+        timeframe: "October 2023 - Present",
+        role: "Associate Software Engineer",
         achievements: [
           <>
-            Involved in dynamic contributions to web and mobile📱 development projects, actively influencing and
-            improving project outcomes.
+            Involved in dynamic contributions to web and mobile📱 development
+            projects, actively influencing and improving project outcomes.
           </>,
           <>
-            Developed multiple shared components to simplify tasks for fellow developers, boosting efficiency and
-            teamwork.
+            Developed multiple shared components to simplify tasks for fellow
+            developers, boosting efficiency and teamwork.
           </>,
           <>
-            Enhanced product performance through significant contributions to backend development, optimizing essential
-            components for improved efficiency 📈.
+            Enhanced product performance through significant contributions to
+            backend development, optimizing essential components for improved
+            efficiency 📈.
           </>,
-          <>Implemented data security for the company’s product to provide role-based access control ⚙️.</>
+          <>
+            Implemented data security for the company’s product to provide
+            role-based access control ⚙️.
+          </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: '/images/projects/project-01/cover-01.jpg',
-            alt: 'Once UI Project',
+            src: "/images/projects/project-01/cover-01.jpg",
+            alt: "Once UI Project",
             width: 16,
-            height: 9
-          }
-        ]
+            height: 9,
+          },
+        ],
       },
       {
         company: (
@@ -193,141 +213,146 @@ const about = {
             Emphatic Sense Technologies
           </a>
         ),
-        timeframe: 'March 2023 - June 2023',
-        role: 'Software Engineer Intern',
+        timeframe: "March 2023 - June 2023",
+        role: "Software Engineer Intern",
         achievements: [
           <>
-            Gained experience with Git version control contributing to the development and maintenance of code
-            repositories.
+            Gained experience with Git version control contributing to the
+            development and maintenance of code repositories.
           </>,
           <>
-            Worked on the application dashboard, making it more user-friendly and improving its overall functionality📱.
-          </>
+            Worked on the application dashboard, making it more user-friendly
+            and improving its overall functionality📱.
+          </>,
         ],
-        images: []
-      }
-    ]
+        images: [],
+      },
+    ],
   },
   studies: {
     display: true, // set to false to hide this section
-    title: 'Studies',
+    title: "Studies",
     institutions: [
       {
-        name: 'Saveetha Engineering College',
-        description: <>B.E. - Biomedical Engineering</>
+        name: "Saveetha Engineering College",
+        description: <>B.E. - Biomedical Engineering</>,
       },
       {
-        name: 'Zion Matriculation Higher Secondary School',
-        description: <>Till 12th</>
-      }
-    ]
+        name: "Zion Matriculation Higher Secondary School",
+        description: <>Till 12th</>,
+      },
+    ],
   },
   technical: {
     display: true, // set to false to hide this section
-    title: 'Technical skills',
+    title: "Technical skills",
     skills: [
       {
-        title: 'Figma',
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+        title: "Figma",
+        description: (
+          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+        ),
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: '/images/projects/project-01/cover-02.jpg',
-            alt: 'Project image',
+            src: "/images/projects/project-01/cover-02.jpg",
+            alt: "Project image",
             width: 16,
-            height: 9
+            height: 9,
           },
           {
-            src: '/images/projects/project-01/cover-03.jpg',
-            alt: 'Project image',
+            src: "/images/projects/project-01/cover-03.jpg",
+            alt: "Project image",
             width: 16,
-            height: 9
-          }
-        ]
+            height: 9,
+          },
+        ],
       },
       {
-        title: 'Next.js',
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+        title: "Next.js",
+        description: (
+          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+        ),
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: '/images/projects/project-01/cover-04.jpg',
-            alt: 'Project image',
+            src: "/images/projects/project-01/cover-04.jpg",
+            alt: "Project image",
             width: 16,
-            height: 9
-          }
-        ]
-      }
-    ]
-  }
+            height: 9,
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const blog = {
-  path: '/blog',
-  label: 'Contact',
-  title: 'Writing about design and tech...',
-  description: `Read what ${person.name} has been up to recently`
+  path: "/blog",
+  label: "Contact",
+  title: "Writing about design and tech...",
+  description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
 };
 
 const work = {
-  path: '/work',
-  label: 'Projects',
+  path: "/work",
+  label: "Projects",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`
+  description: `Design and dev projects by ${person.name}`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
   // All projects will be listed on the /home and /work routes
 };
 
 const gallery = {
-  path: '/gallery',
-  label: 'Gallery',
+  path: "/gallery",
+  label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `A photo collection by ${person.name}`,
 
   images: [
     {
-      src: '/images/gallery/puppy.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/puppy.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/river.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/river.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/me.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/me.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/ganesha.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/ganesha.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/moon.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/moon.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/mahabs.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/mahabs.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/vertical-3.jpg',
-      alt: 'image',
-      orientation: 'vertical'
+      src: "/images/gallery/vertical-3.jpg",
+      alt: "image",
+      orientation: "vertical",
     },
     {
-      src: '/images/gallery/vertical-4.jpg',
-      alt: 'image',
-      orientation: 'vertical'
-    }
-  ]
+      src: "/images/gallery/vertical-4.jpg",
+      alt: "image",
+      orientation: "vertical",
+    },
+  ],
 };
 
 export { person, social, newsletter, home, about, blog, work, gallery };

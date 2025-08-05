@@ -19,7 +19,8 @@ import {
   SiFigma,
   SiAdobephotoshop,
   SiAdobeillustrator,
-  SiSap
+  SiSap,
+  SiApple, SiXcode
 } from 'react-icons/si';
 
 export default function SkillsSection() {
@@ -239,6 +240,30 @@ export default function SkillsSection() {
                   filter: 'drop-shadow(0 0 8px rgba(49, 168, 255, 0.3))'
                 }}
               />
+              <SiApple
+  key="swiftui"
+  size={80}
+  color="rgba(107, 105, 105, 1)"
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    margin: '0px 20px',
+    filter: 'drop-shadow(0 0 8px rgba(0, 0, 0, 0.3))'
+  }}
+/>
+
+<SiXcode
+  key="xcode"
+  size={80}
+  color="rgba(21, 117, 249, 0.7)"
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    margin: '0px 20px',
+    filter: 'drop-shadow(0 0 8px rgba(21, 117, 249, 0.3))'
+  }}
+/>
+
             </div>
           ]}
           velocity={50}
