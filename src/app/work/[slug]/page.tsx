@@ -15,9 +15,15 @@ import { baseURL } from "@/app/resources";
 import { about, person, work } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Meta, Schema } from "@/once-ui/modules";
 
+// ✅ Shared type for consistency
+type ProjectPageProps = {
+  params: { slug: string | string[] };
+};
+
+// Generate static routes for all posts
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
   return posts.map((post) => ({
@@ -25,25 +31,23 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   }));
 }
 
+// Generate metadata for SEO
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string | string[] };
-}): Promise<Metadata> {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+}: ProjectPageProps): Promise<Metadata> {
+  const slugPath = Array.isArray(params.slug)
+    ? params.slug.join("/")
+    : params.slug || "";
 
   const posts = getPosts(["src", "app", "work", "projects"]);
-  let post = posts.find((post) => post.slug === slugPath);
+  const post = posts.find((p) => p.slug === slugPath);
 
   if (!post) return {};
 
   return Meta.generate({
     title: post.metadata.title,
     description: post.metadata.summary,
-    baseURL: baseURL,
+    baseURL,
     image: post.metadata.image
       ? `${baseURL}${post.metadata.image}`
       : `${baseURL}/og?title=${post.metadata.title}`,
@@ -51,18 +55,14 @@ export async function generateMetadata({
   });
 }
 
-export default async function Project({
-  params,
-}: {
-  params: Promise<{ slug: string | string[] }>;
-}) {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+// Page component
+export default async function Project({ params }: ProjectPageProps) {
+  const slugPath = Array.isArray(params.slug)
+    ? params.slug.join("/")
+    : params.slug || "";
 
-  let post = getPosts(["src", "app", "work", "projects"]).find(
-    (post) => post.slug === slugPath
+  const post = getPosts(["src", "app", "work", "projects"]).find(
+    (p) => p.slug === slugPath
   );
 
   if (!post) {
@@ -70,8 +70,8 @@ export default async function Project({
   }
 
   const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
+    post.metadata.team?.map((member) => ({
+      src: member.avatar,
     })) || [];
 
   return (
@@ -91,6 +91,7 @@ export default async function Project({
           image: `${baseURL}${person.avatar}`,
         }}
       />
+
       <Column maxWidth="xs" gap="16">
         <Button
           data-border="rounded"
@@ -104,6 +105,7 @@ export default async function Project({
         </Button>
         <Heading variant="display-strong-s">{post.metadata.title}</Heading>
       </Column>
+
       {post.metadata.images.length > 0 && (
         <SmartImage
           priority
@@ -113,6 +115,7 @@ export default async function Project({
           src={post.metadata.images[0]}
         />
       )}
+
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
         <Flex gap="12" marginBottom="24" vertical="center">
           {post.metadata.team && (
@@ -122,11 +125,14 @@ export default async function Project({
             {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
           </Text>
         </Flex>
+
         <CustomMDX source={post.content} />
       </Column>
+
       <ScrollToHash />
     </Column>
   );
 }
 
+// ✅ Prevent edge/runtime conflicts
 export const dynamic = "force-dynamic";
