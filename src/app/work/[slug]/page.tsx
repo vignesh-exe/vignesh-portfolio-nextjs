@@ -28,7 +28,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string | string[] }>;
+  params: { slug: string | string[] };
 }): Promise<Metadata> {
   const routeParams = await params;
   const slugPath = Array.isArray(routeParams.slug)
@@ -128,3 +128,5 @@ export default async function Project({
     </Column>
   );
 }
+
+export const dynamic = "force-dynamic";
