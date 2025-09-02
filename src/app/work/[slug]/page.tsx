@@ -18,12 +18,6 @@ import ScrollToHash from "@/components/ScrollToHash";
 import type { Metadata } from "next";
 import { Meta, Schema } from "@/once-ui/modules";
 
-// ✅ Shared type for consistency
-type ProjectPageProps = {
-  params: { slug: string | string[] };
-};
-
-// Generate static routes for all posts
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
   return posts.map((post) => ({
@@ -31,10 +25,11 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   }));
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({
   params,
-}: ProjectPageProps): Promise<Metadata> {
+}: {
+  params: { slug: string | string[] };
+}): Promise<Metadata> {
   const slugPath = Array.isArray(params.slug)
     ? params.slug.join("/")
     : params.slug || "";
@@ -55,8 +50,11 @@ export async function generateMetadata({
   });
 }
 
-// Page component
-export default async function Project({ params }: ProjectPageProps) {
+export default async function Project({
+  params,
+}: {
+  params: { slug: string | string[] };
+}) {
   const slugPath = Array.isArray(params.slug)
     ? params.slug.join("/")
     : params.slug || "";
@@ -134,5 +132,5 @@ export default async function Project({ params }: ProjectPageProps) {
   );
 }
 
-// ✅ Prevent edge/runtime conflicts
+// Avoid edge/static conflict
 export const dynamic = "force-dynamic";
