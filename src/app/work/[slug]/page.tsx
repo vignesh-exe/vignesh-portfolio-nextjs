@@ -28,12 +28,9 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string | string[] };
+  params: { slug: string };
 }): Promise<Metadata> {
-  const slugPath = Array.isArray(params.slug)
-    ? params.slug.join("/")
-    : params.slug || "";
-
+  const slugPath = params.slug;
   const posts = getPosts(["src", "app", "work", "projects"]);
   const post = posts.find((p) => p.slug === slugPath);
 
@@ -53,12 +50,9 @@ export async function generateMetadata({
 export default async function Project({
   params,
 }: {
-  params: { slug: string | string[] };
+  params: { slug: string };
 }) {
-  const slugPath = Array.isArray(params.slug)
-    ? params.slug.join("/")
-    : params.slug || "";
-
+  const slugPath = params.slug;
   const post = getPosts(["src", "app", "work", "projects"]).find(
     (p) => p.slug === slugPath
   );
