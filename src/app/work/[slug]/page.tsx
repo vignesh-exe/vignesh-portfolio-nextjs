@@ -15,10 +15,19 @@ import { baseURL } from "@/app/resources";
 import { about, person, work } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
-import type { Metadata, PageProps } from "next";
+import type { Metadata } from "next";
 import { Meta, Schema } from "@/once-ui/modules";
 
 type Params = { slug: string };
+
+// Polyfill for Next 15 PageProps type (params/searchParams as Promises)
+type PageProps<
+  P = Record<string, string>,
+  S = Record<string, string | string[] | undefined>
+> = {
+  params: Promise<P>;
+  searchParams?: Promise<S>;
+};
 
 export async function generateStaticParams(): Promise<Params[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
