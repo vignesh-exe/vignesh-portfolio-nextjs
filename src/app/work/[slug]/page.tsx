@@ -15,15 +15,12 @@ import { baseURL } from "@/app/resources";
 import { about, person, work } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
-import type { Metadata } from "next";
+import type { Metadata, PageProps } from "next";
 import { Meta, Schema } from "@/once-ui/modules";
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-}
+type Params = { slug: string };
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<Params[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
   return posts.map((post) => ({
     slug: post.slug,
@@ -32,13 +29,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const slugPath = params.slug;
+}: PageProps<Params>): Promise<Metadata> {
+  const { slug } = await params;
 
   const posts = getPosts(["src", "app", "work", "projects"]);
-  const post = posts.find((p) => p.slug === slugPath);
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) return {};
 
@@ -53,15 +48,11 @@ export async function generateMetadata({
   });
 }
 
-export default async function Project({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const slugPath = params.slug;
+export default async function Project({ params }: PageProps<Params>) {
+  const { slug } = await params;
 
   const post = getPosts(["src", "app", "work", "projects"]).find(
-    (p) => p.slug === slugPath
+    (p) => p.slug === slug
   );
 
   if (!post) {
