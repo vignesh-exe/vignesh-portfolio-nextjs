@@ -167,7 +167,7 @@ export default function About() {
                 "UI/UX Designer",
                 "React Expert",
                 "Problem Solver",
-                "ios developer",
+                "iOS developer",
               ]}
               mainClassName="rotating-text-container"
               staggerFrom={"last"}

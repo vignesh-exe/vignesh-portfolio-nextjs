@@ -39,7 +39,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="l" gap="l" horizontal="center">
+    <Column maxWidth="l" gap="xl" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -67,7 +67,7 @@ export default function Home() {
           horizontal="center"
           paddingBottom="16"
           // speed="medium"
-          style={{ width: "100%", marginTop: "60px" }}
+          style={{ width: "200%", marginTop: "60px" }}
         >
           <Heading
             wrap="balance"

@@ -7,7 +7,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Front-End Developer and ios Developer",
+  role: "Front-End Developer and iOS Developer",
   avatar: "/images/avatar.PNG",
   email: "mailto:vigneshashokann@gmail.com",
   location: "Asia/Kolkata",
@@ -85,7 +85,7 @@ const home = {
         speed={80}
         maxIterations={20}
       />{" "}
-      , Front-End Developer and ios Developer at{" "}
+      , Front-End Developer and iOS Developer at{" "}
       <ShinyText
         text="ACCENTURE"
         disabled={false}
@@ -234,12 +234,16 @@ const about = {
     title: "Studies",
     institutions: [
       {
+        name: "Alagappa University",
+        description: <>MBA - Human Resource Management - pursuing</>,
+      },
+      {
         name: "Saveetha Engineering College",
-        description: <>B.E. - Biomedical Engineering</>,
+        description: <>B.E. - Biomedical Engineering - 2023</>,
       },
       {
         name: "Zion Matriculation Higher Secondary School",
-        description: <>Till 12th</>,
+        description: <>HSC - 2019</>,
       },
     ],
   },
