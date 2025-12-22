@@ -7,7 +7,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Front-End Developer and iOS Developer",
+  role: "iOS Developer",
   avatar: "/images/avatar.PNG",
   email: "mailto:vigneshashokann@gmail.com",
   location: "Asia/Kolkata",
@@ -85,7 +85,7 @@ const home = {
         speed={80}
         maxIterations={20}
       />{" "}
-      , Front-End Developer and iOS Developer at{" "}
+      , iOS Developer at{" "}
       <ShinyText
         text="ACCENTURE"
         disabled={false}
@@ -120,18 +120,34 @@ const about = {
     description: (
       <div style={{ fontSize: "16px" }}>
         <p>
-          👨‍💻 Hi, I&apos;m Vignesh Ashokan, a 2023 graduate🎓 with a passion for
-          crafting robust frontend systems. As a seasoned{" "}
+          👨‍💻 Hi, I&apos;m Vignesh Ashokan, an experienced{" "}
+          <span className="text-blue-400">iOS Developer</span> specializing in{" "}
+          <span className="text-white">Swift</span> and{" "}
+          <span className="text-blue-300">SwiftUI</span>, with a strong focus on
+          building scalable, high-performance native iOS applications 📱. I have
+          hands-on expertise in implementing{" "}
+          <span className="text-green-400">VIPER architecture</span>, ensuring
+          clean separation of concerns, testability, and long-term
+          maintainability across complex app modules.
+          <br />
+          <br />I am currently working as a{" "}
           <a
             className="text-green-300 hover:text-green-500 duration-300"
             href="https://www.linkedin.com/in/vignesh-ashokan-08a619276/"
             target="_blank"
             rel="noreferrer"
           >
-            Software developer
-          </a>{" "}
-          I specialize in React.JS and Tailwind CSS 🚀. ✍️ Beyond coding, I love
-          sharing my insights and experiences through engaging blogs on{" "}
+            Software Developer
+          </a>
+          , where I design and deliver intuitive user experiences that align
+          closely with Apple&apos;s Human Interface Guidelines 🚀. My work
+          involves integrating RESTful APIs, handling edge cases, optimizing UI
+          performance, and ensuring seamless localization and accessibility
+          support.
+          <br />
+          <br />
+          Beyond development, I actively share technical insights and real-world
+          iOS experiences through in-depth articles on{" "}
           <a
             className="text-purple-300 hover:text-purple-400 duration-300"
             href="https://medium.com/@vigneshashokann"
@@ -140,16 +156,11 @@ const about = {
           >
             Medium
           </a>
-          , where I delve into the intricacies of software development and
-          technology trends. Lately, I’ve also been expanding into{" "}
-          <span className="text-blue-400">iOS development</span> using{" "}
-          <span className="text-white">SwiftUI</span> and{" "}
-          <span className="text-blue-300">Xcode</span> 🧑‍💻📱, building intuitive
-          and responsive native mobile apps that align with Apple’s design
-          philosophy. On a different note, I&apos;m also into photography📸.
-          It&apos;s not just a hobby; I see it as a way to{" "}
+          , covering topics such as SwiftUI best practices, architectural
+          patterns, and performance optimization. Outside of tech, I enjoy
+          photography 📸—a creative outlet that helps me{" "}
           <span className="text-yellow-500">
-            capture moments🌟📷, tell stories
+            capture moments, tell stories, and refine my eye for detail
           </span>
           .
         </p>
@@ -172,7 +183,7 @@ const about = {
           </a>
         ),
         timeframe: "October 2023 - Present",
-        role: "Associate Software Engineer",
+        role: "iOS Developer - Analyst",
         achievements: [
           <>
             Involved in dynamic contributions to web and mobile📱 development

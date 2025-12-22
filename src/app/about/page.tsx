@@ -75,6 +75,8 @@ export default function About() {
 
   // Skills data with icons and colors
   const skills = [
+    { icon: <SiApple size={40} />, name: "SwiftUI", color: "#868686ff" },
+    { icon: <SiXcode size={40} />, name: "Xcode", color: "#1575F9" },
     { icon: <SiReact size={40} />, name: "React", color: "#61DAFB" },
     { icon: <SiNextdotjs size={40} />, name: "Next.js", color: "#868686ff" },
     { icon: <SiTypescript size={40} />, name: "TypeScript", color: "#3178C6" },
@@ -103,8 +105,6 @@ export default function About() {
       color: "#FF9A00",
     },
     { icon: <SiSap size={40} />, name: "SAP Logon", color: "#0FAAFF" },
-    { icon: <SiApple size={40} />, name: "SwiftUI", color: "#868686ff" },
-    { icon: <SiXcode size={40} />, name: "Xcode", color: "#1575F9" },
   ];
 
   return (
@@ -163,10 +163,10 @@ export default function About() {
             />
             <RotatingText
               texts={[
-                "Frontend Developer",
+                "Web Developer",
                 "UI/UX Designer",
-                "React Expert",
-                "Problem Solver",
+                "Swift Enthusiast",
+                "Quick Learner",
                 "iOS developer",
               ]}
               mainClassName="rotating-text-container"

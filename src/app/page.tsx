@@ -39,7 +39,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="l" gap="xl" horizontal="center">
+    <Column maxWidth="l" gap="l" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -66,16 +66,24 @@ export default function Home() {
           fillWidth
           horizontal="center"
           paddingBottom="16"
-          // speed="medium"
-          style={{ width: "200%", marginTop: "60px" }}
+          style={{ width: "100%", marginTop: "60px", overflow: "hidden" }}
         >
-          <Heading
-            wrap="balance"
-            variant="display-strong-l"
-            style={{ textAlign: "center" }}
+          <div
+            style={{
+              maxWidth: "100%",
+              overflow: "hidden",
+              display: "flex",
+              justifyContent: "center",
+            }}
           >
-            <ThemedTextPressure text="Hello!!!" minFontSize={450} />
-          </Heading>
+            <Heading
+              wrap="balance"
+              variant="display-strong-l"
+              style={{ textAlign: "left" }}
+            >
+              <ThemedTextPressure text="Hello!!!" minFontSize={300} />
+            </Heading>
+          </div>
         </RevealFx>
 
         {/* Subline text */}
@@ -175,7 +183,12 @@ export default function Home() {
       <div style={{ marginTop: "-135px", marginBottom: "-230px" }}>
         <ModelViewerSection />
       </div>
-      <Column maxWidth="l" gap="m" horizontal="center" align="center">
+      <Column
+        maxWidth="l"
+        gap="xl"
+        horizontal="center"
+        style={{ overflowX: "hidden" }}
+      >
         <SkillSection />
       </Column>
       {/* Blog Section */}
@@ -200,7 +213,7 @@ export default function Home() {
           horizontal="center"
           paddingTop="16"
           paddingBottom="32"
-          style={{ width: "200%" }}
+          style={{ width: "100%" }}
         >
           <Magnet padding={50} magnetStrength={3}>
             <Badge
