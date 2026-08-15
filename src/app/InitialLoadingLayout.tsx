@@ -1,56 +1,53 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Flex, Spinner } from '@/once-ui/components';
-import { usePathname } from 'next/navigation'; // Remove useSearchParams
-import BlurText from '@/blocks/TextAnimations/BlurText/BlurText';
-import Counter from '@/blocks/Components/Counter/Counter';
+import { Flex } from '@/once-ui/components';
 import SplitText from '@/blocks/TextAnimations/SplitText/SplitText';
+import Counter from '@/blocks/Components/Counter/Counter';
 
 interface InitialLoadingLayoutProps {
   children: React.ReactNode;
 }
 
-export default function InitialLoadingLayout({ children }: InitialLoadingLayoutProps) {
+export default function InitialLoadingLayout({
+  children,
+}: InitialLoadingLayoutProps) {
+  const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingPercentage, setLoadingPercentage] = useState(0);
-  const [initialLoadComplete, setInitialLoadComplete] = useState(() => {
-    // Check if we're in the browser and if initial load was completed before
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('initialLoadComplete') === 'true';
-    }
-    return false;
-  });
 
-  // Only use pathname, not searchParams
-  const pathname = usePathname();
-
-  // Effect for initial page load only
   useEffect(() => {
-    // Skip loading if not the first load
-    if (initialLoadComplete) {
+    setIsMounted(true);
+
+    const hasCompletedInitialLoad =
+      sessionStorage.getItem('initialLoadComplete') === 'true';
+
+    if (hasCompletedInitialLoad) {
+      setIsLoading(false);
       return;
     }
 
-    // Simulate loading progress
+    let progress = 0;
+
     const progressInterval = setInterval(() => {
-      setLoadingPercentage(prev => {
-        if (prev >= 99) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + Math.floor(Math.random() * 10) + 1;
-      });
+      progress += Math.floor(Math.random() * 10) + 1;
+
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(progressInterval);
+      }
+
+      setLoadingPercentage(progress);
     }, 200);
 
-    // Set initial loading to false after timer
     const timer = setTimeout(() => {
       setIsLoading(false);
-      setInitialLoadComplete(true);
-      // Store in sessionStorage to persist across page navigations but not browser refreshes
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('initialLoadComplete', 'true');
-      }
+
+      sessionStorage.setItem(
+        'initialLoadComplete',
+        'true'
+      );
+
       clearInterval(progressInterval);
     }, 6000);
 
@@ -58,14 +55,21 @@ export default function InitialLoadingLayout({ children }: InitialLoadingLayoutP
       clearTimeout(timer);
       clearInterval(progressInterval);
     };
-  }, []); // Empty dependency array - runs only once on mount
+  }, []);
 
-  // If not the initial load, don't show loading screen
-  if (!isLoading || initialLoadComplete) {
+  /*
+   * Important:
+   * During SSR and the first client render, return the same
+   * markup so React doesn't encounter a hydration mismatch.
+   */
+  if (!isMounted) {
+    return null;
+  }
+
+  if (!isLoading) {
     return <>{children}</>;
   }
 
-  // Show loading screen only for initial load
   return (
     <Flex
       fillWidth
@@ -76,20 +80,37 @@ export default function InitialLoadingLayout({ children }: InitialLoadingLayoutP
       style={{ minHeight: '100vh' }}
       direction="column"
     >
-      <Spinner size="xl" />
-      <Flex direction="column" gap="s" horizontal="center">
-        <div className="text-center" style={{ fontSize: '70px', fontWeight: 'bolder' }}>
-          <SplitText
-            text="Perfecting pixels… almost there!!!"
-            className="text-2xl font-semibold text-center"
-            delay={50}
-            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-            threshold={0.2}
-            rootMargin="-50px"
-          />
-        </div>
-        <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div
+        className="text-center"
+        style={{
+          fontSize: '70px',
+          fontWeight: 'bolder',
+        }}
+      >
+        <SplitText
+          text="Perfecting pixels… almost there!!!"
+          className="text-2xl font-semibold text-center"
+          delay={50}
+          animationFrom={{
+            opacity: 0,
+            transform: 'translate3d(0,50px,0)',
+          }}
+          animationTo={{
+            opacity: 1,
+            transform: 'translate3d(0,0,0)',
+          }}
+          threshold={0.2}
+          rootMargin="-50px"
+        />
+
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <Counter
             value={loadingPercentage}
             fontSize={52}
@@ -100,18 +121,20 @@ export default function InitialLoadingLayout({ children }: InitialLoadingLayoutP
             gradientFrom="rgba(0,0,0,0.2)"
             gradientTo="transparent"
           />
+
           <span
             style={{
               fontSize: '52px',
               fontWeight: 'bold',
-              color: 'var(--color-text-primary,rgb(141, 152, 152))',
-              marginLeft: '4px'
+              color:
+                'var(--color-text-primary, rgb(141, 152, 152))',
+              marginLeft: '4px',
             }}
           >
             %
           </span>
         </div>
-      </Flex>
+      </div>
     </Flex>
   );
 }

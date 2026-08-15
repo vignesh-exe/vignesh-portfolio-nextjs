@@ -108,7 +108,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               }}
             />
             <InitialLoadingLayout>
-              {' '}
               {/* Wrap your content with the loading layout */}
               <Flex fillWidth minHeight="16" hide="s"></Flex>
               <Header />

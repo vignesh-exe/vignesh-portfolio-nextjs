@@ -23,7 +23,7 @@ import {
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
-import ThemedTextPressure from "@/app/ThemedTextPressure"; // Import the new component
+import ParticleText from "@/components/ParticleText"; // Import the new component
 import ModelViewerSection from "@/blocks/Components/ModelViewerSection";
 import Magnet from "@/blocks/Animations/Magnet/Magnet";
 import SkillSection from "@/components/SkillSection";
@@ -61,31 +61,37 @@ export default function Home() {
         horizontal="center"
         align="center"
       >
-        <RevealFx
-          translateY="4"
-          fillWidth
-          horizontal="center"
-          paddingBottom="16"
-          style={{ width: "100%", marginTop: "60px", overflow: "hidden" }}
-        >
-          <div
-            style={{
-              maxWidth: "100%",
-              overflow: "hidden",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Heading
-              wrap="balance"
-              variant="display-strong-l"
-              style={{ textAlign: "left" }}
-            >
-              <ThemedTextPressure text="Hello!!!" minFontSize={300} />
-            </Heading>
-          </div>
-        </RevealFx>
-
+        {/* Particle Text */}
+<div
+  style={{
+    width: "100%",
+    height: "250px",
+    marginTop: "10px",
+    marginBottom: "0px",
+    overflow: "hidden",
+    background: "transparent",
+  }}
+>
+  <ParticleText
+    text="HELLO!!!"
+    particleSize={2.4}
+    density={4}
+    color="#8FD3FF"
+    highlightColor="#00AEEF"
+    scatter={190}
+    gatherDuration={1600}
+    stagger={420}
+    pointerRepel={42}
+    repelRadius={120}
+    idleDrift={0.8}
+    trigger="mount"
+    fontSize="clamp(5rem, 15vw, 10rem)"
+    fontWeight={1000}
+    fontFamily="inherit"
+    glow
+    startDelay={700}
+  />
+</div>
         {/* Subline text */}
         <RevealFx
           translateY="8"
