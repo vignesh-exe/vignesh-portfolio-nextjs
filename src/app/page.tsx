@@ -23,7 +23,7 @@ import {
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
-import ParticleText from "@/components/ParticleText"; // Import the new component
+import ParticleText from "@/components/ParticleText";
 import ModelViewerSection from "@/blocks/Components/ModelViewerSection";
 import Magnet from "@/blocks/Animations/Magnet/Magnet";
 import SkillSection from "@/components/SkillSection";
@@ -53,6 +53,7 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
+
       {/* TextPressure Hello! section */}
       <Column
         fillWidth
@@ -62,36 +63,36 @@ export default function Home() {
         align="center"
       >
         {/* Particle Text */}
-<div
-  style={{
-    width: "100%",
-    height: "250px",
-    marginTop: "10px",
-    marginBottom: "0px",
-    overflow: "hidden",
-    background: "transparent",
-  }}
->
-  <ParticleText
-    text="HELLO!!!"
-    particleSize={2.4}
-    density={4}
-    color="#8FD3FF"
-    highlightColor="#00AEEF"
-    scatter={190}
-    gatherDuration={1600}
-    stagger={420}
-    pointerRepel={42}
-    repelRadius={120}
-    idleDrift={0.8}
-    trigger="mount"
-    fontSize="clamp(5rem, 15vw, 10rem)"
-    fontWeight={1000}
-    fontFamily="inherit"
-    glow
-    startDelay={700}
-  />
-</div>
+        <div
+          style={{
+            width: "100%",
+            height: "250px",
+            marginTop: "10px",
+            marginBottom: "0px",
+            overflow: "hidden",
+            background: "transparent",
+          }}
+        >
+          <ParticleText
+            text="HELLO!!!"
+            particleSize={2.4}
+            density={4}
+            color="#8FD3FF"
+            highlightColor="#00AEEF"
+            scatter={190}
+            gatherDuration={1600}
+            stagger={420}
+            pointerRepel={42}
+            repelRadius={120}
+            idleDrift={0.8}
+            trigger="mount"
+            fontSize="clamp(5rem, 15vw, 10rem)"
+            fontWeight={1000}
+            fontFamily="inherit"
+            glow
+          />
+        </div>
+
         {/* Subline text */}
         <RevealFx
           translateY="8"
@@ -142,10 +143,10 @@ export default function Home() {
                     borderRadius: "50%",
                     objectFit: "cover",
                     marginLeft: "-0.75rem",
-                    // marginRight: '0.rem'
                   }}
                 />
               )}
+
               {about.title}
             </Flex>
           </Button>
@@ -174,21 +175,35 @@ export default function Home() {
           </RevealFx>
         )}
       </Column>
+
       {/* Headline */}
       <RevealFx
         translateY="4"
         fillWidth
         horizontal="start"
         paddingBottom="16"
-        style={{ width: "100%", alignItems: "center", textAlign: "center" }}
+        style={{
+          width: "100%",
+          alignItems: "center",
+          textAlign: "center",
+        }}
       >
         <Heading wrap="balance" variant="display-strong-l">
           {home.headline}
         </Heading>
       </RevealFx>
-      <div style={{ marginTop: "-135px", marginBottom: "-230px" }}>
+
+      {/* 3D Model */}
+      <div
+        style={{
+          marginTop: "-135px",
+          marginBottom: "-230px",
+        }}
+      >
         <ModelViewerSection />
       </div>
+
+      {/* Skills */}
       <Column
         maxWidth="l"
         gap="xl"
@@ -197,21 +212,29 @@ export default function Home() {
       >
         <SkillSection />
       </Column>
+
       {/* Blog Section */}
       {routes["/blog"] && (
         <Flex fillWidth gap="24" mobileDirection="column">
           <Flex flex={1} paddingLeft="l" paddingTop="24">
-            <Heading as="h2" variant="display-strong-xs" wrap="balance">
+            <Heading
+              as="h2"
+              variant="display-strong-xs"
+              wrap="balance"
+            >
               Latest from the blog
             </Heading>
           </Flex>
+
           <Flex flex={3} paddingX="20">
             <Posts range={[1, 2]} columns="2" />
           </Flex>
         </Flex>
       )}
+
       {/* Projects Section */}
       <Projects range={[2]} />
+
       {/* Contact Badge with Magnet Effect */}
       {newsletter.display && (
         <RevealFx
